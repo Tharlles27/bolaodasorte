@@ -1,0 +1,174 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+</div> 
+   <div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="{% static 'assets/images/logo.png' %}" width="40" height="40">
+                    </div>
+                            <div>Painel de controle
+                        <div class="page-title-subheading">Painel de informações a certa de dados eferente ao sorteio Bolão da Sorte.
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                    
+                    <div class="d-inline-block dropdown">
+                        
+                    </div>
+                </div>    </div>
+        </div>            <div class="row">
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-midnight-bloom">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">1° Prêmio {{porcent_maior}}%</div>
+                            <div class="widget-subheading">Maior pontuador</div>                    
+                        </div>
+                        
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>R$ {{premio_maior}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-premium-dark">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">2° Prêmio {{porcent_menor}}%</div>
+                            <div class="widget-subheading">Menor pontuador</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-white"><span>R$ {{premio_menor}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-grow-early">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Total</div>
+                            <div class="widget-subheading">Valor total arrecadado</div>
+                        </div>
+                        <div class="widget-content-right">
+                            {% if jogos_pago %}
+                            <div class="widget-numbers text-white"><span>R$ {{jogos_pago}}</span></div>
+                            {% else %}
+                            <div class="widget-numbers text-white"><span>R$ 0</span></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-premium-dark">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Valor da jogada</div>
+                            <div class="widget-subheading">valor padrão de uma jogada</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-warning"><span>{{pd}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Total de jogadores</div>
+                                <div class="widget-subheading"><a href="{% url 'core:pendentes' %}">Pessoas sem pagar <b>{{pd}}</b></a> </div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-success">{{total_jogador}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Valor da jogada</div>
+                                <div class="widget-subheading">Valor padrão para escolher 10 numeros</div>
+                            </div>
+                            <div class="widget-content-right">
+                                {% if valor_jogada %}
+                                <div class="widget-numbers text-warning">{{valor_jogada}}R$</div>
+                                {% else %}
+                                <div class="widget-numbers text-warning">0R$</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">Meu Lucro</div>
+                                <div class="widget-subheading">Lucro do definido</div>
+                            </div>
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-danger">R$ {{meu_premio}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-premium-dark">
+                    <div class="widget-content-wrapper text-white">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Pendências</div>
+                            <div class="widget-subheading">Pessoas com pagamento pendente</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers text-warning"><span>{{pd}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+        
+        {% for p in maiorais %}
+                                    {% if p.acertos == 10  %}
+                                        <div class="alert alert-success" role="alert">
+                                            <h4 class="alert-heading">{{p.nome}} na posição {{p.id}}</h4>
+                                            <hr>
+                                            <p class="mb-0">{{p.nome}} Acertou as dez dezenas do sorteio!!!</p>
+                                          </div>
+                                  {% else %}
+                                  {% endif %}
+                                  
+           {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+    

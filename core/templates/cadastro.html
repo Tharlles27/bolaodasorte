@@ -1,0 +1,105 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block busca %}
+<div class="search-wrapper">
+    <div class="input-holder">
+        <input type="text" class="search-input" placeholder="Type to search">
+        <button class="search-icon"><span></span></button>
+    </div>
+    <button class="close"></button>
+</div>
+{% endblock busca %}
+{% block content %}
+</div> 
+   <div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="{% static 'assets/images/logo.png' %}" width="40" height="40">
+                    </div>
+                    <div>Cadastro de novos jogadores
+                        <div class="page-title-subheading">Total de jogadores cadastrados ate o momento ({{contagem}})
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                    
+                    <div class="d-inline-block dropdown">
+                        
+                    </div>
+                </div>    </div>
+        </div>         
+        
+          
+        <form method="POST">
+          {% csrf_token %}
+          
+           <div class="form-row">
+              <div class="form-group col-md-9">
+                {{form.nome|as_crispy_field}}
+              </div>
+              <div class="form-row">
+                {{form.telefone|as_crispy_field}}               
+              </div>
+              
+            </div>
+            {{form_numeros.management_form}}
+            <div class="form-row">
+                
+                  {% for tel in form_numeros %}
+                  <div class="col">
+                  {{tel.numeros|as_crispy_field}}
+                  </div>
+                  {% endfor %}<p>
+
+               
+              </div>
+            <div class="form-group">
+              <div class="form-check">
+                {{form.pagamento|as_crispy_field}}
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <div class="form-check">
+                {{form.repeticao|as_crispy_field}}
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+          </form>
+<br>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% if pessoa %}
+                Sucesso!!! <strong>{{last.nome}}</strong> Já esta salvo no sistema<br>
+                <strong>Numeros:</strong> 
+                {% for item in last.escolha_set.all %}
+                {{item.numeros}}
+                {% endfor %} 
+                
+                
+
+                <button type="button" class="close" data  -dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            {% else %}
+             <strong>AINDA NAO EXISTE JOGADORES CADASTRADOS...</strong><br>
+            {% endif %}
+           
+          </div>
+          
+          
+        </div>
+        
+        </div>
+        
+        </div>
+        
+        </div>
+        
+    </div>
+{% endblock %}

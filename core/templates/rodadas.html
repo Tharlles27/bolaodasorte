@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block busca %}
+<div class="search-wrapper">
+    <div class="input-holder">
+        <input type="text" class="search-input" placeholder="Type to search">
+        <button class="search-icon"><span></span></button>
+    </div>
+    <button class="close"></button>
+</div>
+{% endblock busca %}
+{% block content %}
+</div> 
+   <div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="{% static 'assets/images/logo.png' %}" width="40" height="40">
+                    </div>
+                    <div>Cadastrar nova rodada de sorteio
+                        <div class="page-title-subheading">Total de rodadas 2 
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                    <a href="deletarRodadas/">
+                        <button type="button" data-toggle="tooltip" title="Por segurança verifique se os jogadores recorrentes estao todos marcados..." data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+                            Reiniciar rodadas
+                        </button> 
+                        </a>
+                    <div class="d-inline-block dropdown">
+                        
+                    </div>
+                </div>    </div>
+        </div>         
+        
+          
+        <form method="POST">
+          {% csrf_token %}
+          
+           <div class="form-row">
+              <div class="form-group col-md-9">
+                {{form.num_rodada|as_crispy_field}}
+              </div>
+              
+              
+            </div>
+            {{form_dezenas.management_form}}
+            <div class="form-row">
+                
+                  {% for tel in form_dezenas %}
+                  <div class="col">
+                  {{tel.dezena|as_crispy_field}}
+                  </div>
+                  {% endfor %}
+                
+               
+              </div>
+            
+
+            
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+          </form>
+<br>   
+                {% for obj in objects %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <u>{{obj.num_rodada}}</u>   <br>
+                    {% for var in obj.dezenas_set.all %}
+                        {{var.dezena}}
+                    {% endfor %}
+                    
+                      
+                </div>   
+                {% endfor %}            
+           
+          
+          
+          
+        </div>
+        
+        </div>
+        
+        </div>
+        
+        </div>
+        
+    </div>
+{% endblock %}

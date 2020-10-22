@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block busca %}
+<div class="search-wrapper">
+    <div class="input-holder">
+        <input type="text" class="search-input" placeholder="Type to search">
+        <button class="search-icon"><span></span></button>
+    </div>
+    <button class="close"></button>
+</div>
+{% endblock busca %}
+{% block content %}
+</div> 
+   <div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="{% static 'assets/images/logo.png' %}" width="40" height="40">
+                    </div>
+                    <div>Editar usas configurações
+                        <div class="page-title-subheading">As configurações inseridas aqui farão parte dos calculos exibidos na pagina inicial do sistema
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                  
+                   
+                </div>    
+            </div>
+        </div> 
+        {% if configuracao %}  
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Configurações já inseridas</h4>
+            <p>Aêêê! Você ja inseriu dados de configurações como, <b>Porcentagens de maior e menor pontuador</b> e etc, são informações que nao precisam ser adicionadas mas são importantes para o calculo de algumas funcionalidades. </p>
+            <hr>
+            <p class="mb-0">Caso deseje edita-las: <a href="{% url 'core:deletar-config' %}" type="button" class="btn btn-secondary">Editar</a>
+          </div>
+          {% else %}      
+        <form method="POST">{% csrf_token %}
+          <div class="form-group col-md-4">
+            {{form.v_max_ponto|as_crispy_field}}
+            <small id="emailHelp" class="form-text text-muted">Os dados informados aqui sao importantes para os calculos do sistema.</small>
+          </div>
+          <div class="form-group col-md-4">
+            {{form.v_min_ponto|as_crispy_field}}
+          </div>
+          <div class="form-group  col-md-4">
+            {{form.valor_jogada|as_crispy_field}}
+          </div> 
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+        {% endif %}
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+
+{% endblock %}
+

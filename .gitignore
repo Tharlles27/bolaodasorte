@@ -1,0 +1,11 @@
+# See the name for you IDE
+.idea
+# If you are using sqlite3
+*.sqlite3
+# Name of your virtuan env
+venv
+insercao.py
+*pyc
+
+ 
+ 

@@ -1,0 +1,141 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block busca %}
+<div class="search-wrapper">
+    <div class="input-holder">
+        <input type="text" class="search-input" placeholder="Type to search">
+        <button class="search-icon"><span></span></button>
+    </div>
+    <button class="close"></button>
+</div>
+{% endblock busca %}
+{% block content %}
+</div> 
+   <div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <img src="{% static 'assets/images/logo.png' %}" width="40" height="40">
+                    </div>
+                    <div>Analise de pontuação e lista {{s}}
+                        <div class="page-title-subheading">Lista de jogadores e seus respectivos jogos
+                        </div>
+                    </div>
+                </div>
+                <div class="page-title-actions">
+                  <a href="#">
+                    <button type="button" data-toggle="tooltip" title="Por segurança verifique se os jogadores recorrentes estao todos marcados..." data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+                        Gerar PDF
+                    </button> 
+                    </a>
+                  <a href="deleteAll/">
+                    <button type="button" data-toggle="tooltip" title="Por segurança verifique se os jogadores recorrentes estao todos marcados..." data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+                        Reiniciar jogos
+                    </button> 
+                    </a>
+                    <div class="d-inline-block dropdown">
+                        <!-- <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+                            <span class="btn-icon-wrapper pr-2 opacity-7">
+                                <i class="fa fa-business-time fa-w-20"></i>
+                            </span>
+                            Buttons -->
+                        </button> 
+                        
+                    </div>
+                </div>    </div>
+        </div>         
+        <table class="table">
+            <thead class="thead-dark">
+              <tr align="center">
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Acertos</th>
+                <th scope="col">Dezenas</th>
+                <th scope="col">Açôes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for person in pessoa %}
+              <tr align="center">
+                <th scope="row">{{person.id}}</th>
+                <td>
+                  {{person.nome|upper}}
+                </td>
+                <td>30</td>
+                <td>
+                    <table>
+                        <tr>
+                          {% for item in person.escolha_set.all %}
+                            {% if item.sorteado == True %}
+                            <td><div class="numberCircle_sorted">{{item.numeros}}</div></td>
+                            {% else %}
+                            <td><div class="numberCircle">{{item.numeros}}</div></td>
+                            {% endif %}
+                          {% endfor %}
+
+                          <!-- {% for item in person.escolha_set.all %}
+                            {% if item.sorteado == True %}
+                            <td bgcolor="#00FF00">{{item.acertos}}</td>
+                            {% else %}
+                            <td>{{item.acertos}}</td>
+                            {% endif %}
+                          {% endfor %} -->
+                        </tr>
+                      </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><div>
+                                <div class="col-md-2">
+                                    <a href="../pagar/{{person.id}}">
+                                    <div class="font-icon-wrapper">
+                                      <img src="{% static 'assets/images/pagamento.png' %}" width='30' height='30'>
+                                    </a>
+                                    </div>
+                            </div></td>
+                            
+                            <td><div>
+                                <div class="col-md-2">
+                                    <a href="del/{{person.id}}">
+                                    <div class="font-icon-wrapper">
+                                      <img src="{% static 'assets/images/excluir.png' %}" width='30' height='30'>
+                                    </a>
+                                    </div>
+                            </div></td>
+                            
+                        </tr>
+                      </table>
+                    <!-- <div class="form-check">
+                    {% if person.pagamento %}
+                    Pago
+                    {% else %}
+                    Pendente
+                    {% endif %}
+                  </div>
+                </td>
+                <td>
+                  <div class="col-md-2">
+                    <a href="del/{{person.id}}">
+                    <div class="font-icon-wrapper">
+                      <img src="{% static 'assets/images/excluir.png' %}" width='30' height='30'>
+                    </a>
+                    </div> -->
+              </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+
+{% endblock %}
+
